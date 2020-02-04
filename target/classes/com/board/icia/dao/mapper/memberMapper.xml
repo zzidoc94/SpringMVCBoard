@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	1.parameterType에 1개의 Type만 올 수 있다. Type 여러개인 경우 생략할 것.
+	2.parameterType이 DTO인 경우 #{필드명}
+	3.parameterType이 변수인 경우#{변수명}
+	4.parameterType이 Map<key,value>타입인 경우#{key}
+	5.resultType도 1개만 올 수 있는데 1개 이상의 레코드를 검색하는 경우 DTO타입만 명시
+	6.#{}:문자열인 경우 ''추가됨
+	7.${}:''문자열 변환없이 그대로 입력됨(예, 컬럼명 전달시)
+	8.parameterType은 생략 가능하지만 가독성을 위해 비권장
+ -->
 <!-- 회원관련 sql -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.icia.dao.IMemberDao">
+<!-- 아이디는 인터페이스의 메소드 이름 -->
 <select id="getLoginResult" parameterType="member" resultType="boolean">
-	select count(*) from member where id=#{id} and pw=#{pw}
+	select count(*) from member where m_id=#{m_id} and m_pwd=#{m_pwd}
 </select>
+<insert id="memberJoin" parameterType="member">
+	insert into m values(#{m_id},#{m_pwd},#{m_name},#{m_birth},#{m_addr},#{m_phone},default)
+</insert>
+<select id="getSecurityPwd" parameterType="String" resultType="String">
+	select m_pwd from member where m_id=#{m_id}
+</select>
+<!-- 어노테이션으로 대체 -->
+<!-- <select id="getMemberInfo" parameterType="String" resultType="member">
+	select * from minfo where m_id=#{m_id}
+</select> -->
+<select id="hashMapTest" parameterType="Map" resultType="boolean">
+	select count(*) from m where m_id=#{id} and m_pwd=#{pw}
+</select>
+<select id="hashMapTest2" parameterType="Map" resultType="Map">
+	select m_name,g_name from minfo where m_id=#{id}
+</select>
+<!-- <mapper namespace="memberMapper">
+	<select id="getLoginResult" parameterType="member" resultType="boolean">
+		select count(*) from member where m_id=#{id} and m_pwd=#{pw}
+	</select>
+</mapper> -->
 	
 </mapper>

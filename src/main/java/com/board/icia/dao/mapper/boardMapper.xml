@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.icia.dao.IBoardDao">
+	<select id="getBoardList" parameterType="int" resultType="board">
+	<![CDATA[
+		select * from(
+			select /*+index_asc(b pk_b_num)*/ rownum as rn,b.* from b where rownum<=#{pNum}*10
+		)
+		where rn>=#{pNum}*10-9
+	]]>
+	<!-- <![CDATA[
+		select * from blist_1 where ronum >=#{pNum}*10-9 and ronum <=#{pNum}*10
+	]]> -->
+	</select>
+	<select id="getContents" parameterType="int" resultType="board">
+	<![CDATA[
+		select * from blist where b_num=#{bNum}
+	]]>
+	</select>
+	<select id="getReplyList" parameterType="int" resultType="reply">
+	<![CDATA[
+		select * from rlist where r_bnum=#{bNum}
+	]]>
+	</select>
+	
+</mapper>

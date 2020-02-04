@@ -9,9 +9,9 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>4.3.25.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.6.10</org.aspectj-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<org.springframework-version>5.2.2.RELEASE</org.springframework-version>
+		<org.aspectj-version>1.9.2</org.aspectj-version>
+		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
 	<!-- 사설 저장소  -->
 	<repositories>
@@ -166,7 +166,7 @@
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
-		    <version>4.3.25.RELEASE</version>
+		    <version>5.2.2.RELEASE</version>
 		</dependency>
 		<!-- Mybatis:DB FrameWork,ORM -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
@@ -196,7 +196,7 @@
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
-		    <version>4.2.13.RELEASE</version>
+		    <version>5.2.1.RELEASE</version>
 		</dependency>
 		
 		<!-- lombok -->
@@ -208,15 +208,23 @@
 		    <scope>provided</scope>
 		</dependency>
 		
-			
+		<!-- 애플리케이션 단위 테스트 -->
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
+			<version>4.12</version>
+			
 		</dependency>
-		   
+		 <!-- spring test -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>5.2.2.RELEASE</version>
+		    
+		</dependency>
+		
 	</dependencies>
     <build>
         <plugins>
