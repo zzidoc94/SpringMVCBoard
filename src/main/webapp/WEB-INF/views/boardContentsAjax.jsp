@@ -10,7 +10,7 @@
 <body>
    <h3>게시글 상세보기</h3>
    <h3>Board * Reply Contents</h3>
-   <a href="boardDelete?bNum=${board.b_num}">삭제</a>
+   <a href="boarddelete?bNum=${board.b_num}">삭제</a>
    <table>
       <tr height="30">
          <td width="100" bgcolor="pink" align="center">NUM</td>
@@ -42,13 +42,13 @@
     <form name="rFrm" id="rFrm">
    		<table>
    		<tr>
-   			<td><textarea rows="3" cols="50" name="r_contents" style="width:300px"></textarea>
-   			<td><input type="button" value="댓글 전송" style="width:70px;height:50px;"></td>
+   			<td><textarea rows="3" cols="50" name="r_contents" style="width:300px" id="r_contents"></textarea>
+   			<td><input type="button" value="댓글 전송" style="width:70px;height:50px;" onclick="replyInsert(${board.b_num})"></td>
    		</tr>
    		</table>
     </form>
    
-    <table>
+    <table id="rTable">
    		<c:forEach var="r" items="${rList}">
    			<tr height="25" align="center">
 	   			<td width="100">${r.r_id }</td>
@@ -57,5 +57,44 @@
    			</tr>
    		</c:forEach>
     </table>
+    <script>
+    function replyInsert(bNum){
+    	var obj=$('#rFrm').serializeObject();	//js객체 생성{속성:값,속성:값};
+    	obj.r_bnum=bNum;
+    	console.log(obj);
+    	//js 객체--->json으로 변환
+    	var jsonStr=JSON.stringify(obj);
+    	console.log(obj);
+    	$.ajax({								
+    		type:'post',//json으로 넘길땐 get은 안됨
+    		url:'rest/replyinsert',
+    		//1.쿼리스트링 방식
+    		//data:{r_bnum:bNum,r_contents:$("#r_contents").val()},
+    		//data:$('#rFrm').serialize(),
+    		data:obj,
+    		//2.json방식으로 넘김
+    		//data:jsonStr,
+    		//쿼리스트링이 아닌 json방식으로 전송시 명시할 것
+    		//contentType:'application/json; charset=UTF-8',
+    		dataType:'json',
+    		success:function(data,status,xhr){
+    			console.log(status);
+    			console.log(xhr);
+    			console.log(data.rList);
+    			var str="";
+    			$.each(data.rList, function(index,item){
+    				str+= "<tr height='25' align='center'><td width='100'>"+item.r_id
+    				+"</td ><td width='200'>"+item.r_contents
+    				+"</td><td width='200'>"+item.r_date+"</td></tr>"
+    			});
+    			$("#rTable").html(str);
+    		},
+    		error:function(xhr,status){
+    			console.log(error);
+    			console.log(xhr);
+    		}
+    	})
+    }
+    </script>
 </body>
 </html>

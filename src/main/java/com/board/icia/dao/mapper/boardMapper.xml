@@ -5,7 +5,7 @@
 	<select id="getBoardList" parameterType="int" resultType="board">
 	<![CDATA[
 		select * from(
-			select /*+index_asc(b pk_b_num)*/ rownum as rn,b.* from b where rownum<=#{pNum}*10
+			select /*+index_desc(b pk_b_num)*/ rownum as rn,b.* from b where rownum<=#{pNum}*10
 		)
 		where rn>=#{pNum}*10-9
 	]]>
@@ -23,5 +23,20 @@
 		select * from rlist where r_bnum=#{bNum}
 	]]>
 	</select>
+	
+	<insert id="replyInsert" parameterType="reply" >
+	<![CDATA[
+		insert into r values(reply_seq.nextval,#{r_bnum},#{r_contents},#{r_id},default)
+	]]>
+	</insert>
+	
+	<insert id="boardWrite" parameterType="board" useGeneratedKeys="true" keyProperty="b_num">
+		<selectKey keyProperty="b_num" resultType="int" order="BEFORE">
+			select board_seq.nextval from dual
+		</selectKey>
+	<![CDATA[
+		insert into b values(#{b_num},#{b_title},#{b_contents},#{b_id},default,0)
+	]]>
+	</insert>
 	
 </mapper>

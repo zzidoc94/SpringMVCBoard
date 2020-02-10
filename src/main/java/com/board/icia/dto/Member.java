@@ -5,6 +5,7 @@ import org.apache.ibatis.type.Alias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 
 //@Getter@Setter
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Accessors(chain=true)
 public class Member {
 	private String m_id;
 	private String m_pwd;	

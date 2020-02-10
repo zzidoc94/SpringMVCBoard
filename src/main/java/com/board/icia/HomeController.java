@@ -54,7 +54,7 @@ public class HomeController {
 	public ModelAndView logout(HttpServletRequest req) {
 		mav=new ModelAndView();
 		req.getSession().invalidate();
-		mav.setViewName("home");
+		mav.setViewName("redirect:home");
 		return mav;
 	}
 	

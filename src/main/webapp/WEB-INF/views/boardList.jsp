@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>게시판 리스트</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/jquery.serializeObject.js"></script>
 <script>
 	function logout(){
 		$('#logoutFrm').submit();
@@ -67,7 +68,7 @@ html, body {
 </style>
 </head>
 <body>
-<h1>boardList.jsp</h1>
+<h1 align="center">보드리스트</h1>
 
 
 <c:if test="${!empty id }">
@@ -97,8 +98,8 @@ html, body {
 		<td width="80" bgcolor="pink" align="center">포인트</td>
 		<td>${mb.m_point }</td>
 	</tr>
-</table><br>
-<table>
+</table>
+<table style="margin:auto; padding:50px">
 	<tr bgcolor="skyblue" height="30">
 		<th width="100">번호</th>
 		<th width="100">제목</th>
@@ -116,6 +117,9 @@ html, body {
 		</tr>
 	</c:forEach>
 </table>
+<form action="writefrm">
+	<button>글쓰기</button>
+</form>
 
 <!-- 페이징 출력 -->
 <div align="center" id="page">
@@ -163,6 +167,15 @@ html, body {
 			return;
 		else if($layerWindow.hasClass('open'))
 			$layerWindow.removeClass('open');
+	});
+	$(function(){
+		var result='${bNum}';
+		if(result==''){
+			return
+		}
+		if(parseInt(result)>0){
+			alert(result+'번 글을 삭제하였다.');
+		}
 	});
 </script>
 </body>
