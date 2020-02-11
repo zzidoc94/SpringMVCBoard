@@ -1,5 +1,7 @@
 package com.board.icia;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.board.icia.service.BoardManagement;
 import com.board.icia.userClass.DBException;
+import com.board.icia.userClass.FileManager;
+import com.board.icia.userClass.UploadFile;
 
 @Controller
 public class BoradContoller {
@@ -36,7 +40,7 @@ public class BoradContoller {
 	}
 	@RequestMapping(value="/boarddelete")
 	public ModelAndView boardDelete(Integer bNum,RedirectAttributes attr) throws DBException {
-		mav=bm.boardDelete(bNum);
+		mav=bm.boardDelete(bNum,attr);
 		//RedirectAttributes는 Redirect 전 session 영역에 저장한 뒤 redirect 후 즉시 삭제한다
 		//삭제 직전 session 영역에 저장했던 데이터는 request 객체에 저장한다.
 		//attr.addFlashAttribute(): post방식(session에 저장 후 1번 사용하면 삭제함)
@@ -55,5 +59,18 @@ public class BoradContoller {
 		mav= new ModelAndView();
 		mav=bm.boardWrite(multi);
 		return mav;
+	}
+	@RequestMapping(value="/download")
+	public void download(String sysFileName, String oriFileName, HttpServletResponse resp) {
+		System.out.println("oriFileName:"+oriFileName);
+		String full="E:/springwork/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVCBoard/upload/"+sysFileName;
+		FileManager fm=new FileManager();
+		try {
+			fm.download(full, oriFileName, resp);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 }

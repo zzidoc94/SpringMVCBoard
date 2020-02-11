@@ -38,23 +38,23 @@ public class UploadFile {
 		}
 		
 		//3.파일을 가져오기-파일태그가 여러개 일때 이름들 반환
-		/*Iterator<String> files=multi.getFileNames(); //파일태그가 2개이상일때
-		
-		Map<String,String> fMap=new HashMap<String, String>();
-		fMap.put("bNum", String.valueOf(bNum));
-		boolean f=false;
-		while(files.hasNext()){
-			String fileTagName=files.next();
-			System.out.println("fileTag="+fileTagName);  
-			//파일 메모리에 저장
-			MultipartFile mf=multi.getFile(fileTagName); //실제파일
-			String oriFileName=mf.getOriginalFilename();  //a.txt
-			fMap.put("oriFileName", oriFileName);
-			//4.시스템파일이름 생성  a.txt  ==>112323242424.txt
-			String sysFileName=System.currentTimeMillis()+"."
-					+oriFileName.substring(oriFileName.lastIndexOf(".")+1);
-			fMap.put("sysFileName", sysFileName);
-		*/	
+//		Iterator<String> files=multi.getFileNames(); //파일태그가 2개이상일때
+//		
+//		Map<String,String> fMap=new HashMap<String, String>();
+//		fMap.put("bNum", String.valueOf(bNum));
+//		boolean f=false;
+//		while(files.hasNext()){
+//			String fileTagName=files.next();
+//			System.out.println("fileTag="+fileTagName);  
+//			//파일 메모리에 저장
+//			MultipartFile mf=multi.getFile(fileTagName); //실제파일
+//			String oriFileName=mf.getOriginalFilename();  //a.txt
+//			fMap.put("oriFileName", oriFileName);
+//			//4.시스템파일이름 생성  a.txt  ==>112323242424.txt
+//			String sysFileName=System.currentTimeMillis()+"."
+//					+oriFileName.substring(oriFileName.lastIndexOf(".")+1);
+//			fMap.put("sysFileName", sysFileName);
+//		}
 		   //3.파일을 가져오기-파일태그가 1개 일때
 			Map<String,String> fMap=new HashMap<String, String>();
 			fMap.put("bNum", String.valueOf(bNum));
