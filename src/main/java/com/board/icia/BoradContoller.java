@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,10 +14,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.board.icia.exception.DBException;
 import com.board.icia.service.BoardManagement;
-import com.board.icia.userClass.DBException;
 import com.board.icia.userClass.FileManager;
-import com.board.icia.userClass.UploadFile;
 
 @Controller
 public class BoradContoller {
@@ -72,5 +72,11 @@ public class BoradContoller {
 			e.printStackTrace();
 		}
 	
+	}
+	@GetMapping(value="/test")
+	public ModelAndView myBatisTest(String cName, Integer search) {
+			mav=bm.myBatisTest(cName,search);
+			
+		return mav; 
 	}
 }

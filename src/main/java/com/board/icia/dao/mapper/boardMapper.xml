@@ -38,5 +38,11 @@
 		insert into b values(#{b_num},#{b_title},#{b_contents},#{b_id},default,0)
 	]]>
 	</insert>
-	
+	<select id="myBatisTest" resultType="member">
+		select * from minfo
+		<if test="point!=null">
+			where ${cName}=#{point}
+		</if>
+		<!-- and rownum=1 -->
+	</select>
 </mapper>

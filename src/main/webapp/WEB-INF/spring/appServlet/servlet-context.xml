@@ -38,6 +38,7 @@
 				<exclude-mapping path="/joinfrm"/>
 				<exclude-mapping path="/memberjoin"/>
 				<exclude-mapping path="/boardlist" />
+				<exclude-mapping path="/test" />
 				<exclude-mapping path="/"/>
 				<beans:bean class="com.board.icia.userClass.SessionInterseptor" />
 					

@@ -85,7 +85,8 @@
     	$.ajax({								
     		type:'post',//json으로 넘길땐 get은 안됨
     		url:'rest/replyinsert',
-    		//1.쿼리스트링 방식
+    		//1.get:쿼리스트링 방식
+    		//  post:encoded방식
     		//data:{r_bnum:bNum,r_contents:$("#r_contents").val()},
     		//data:$('#rFrm').serialize(),
     		data:obj,

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,6 +41,7 @@ public class BoardRestController {
 	//jackson 버전
 	@RequestMapping(value="/replyinsert",produces = "application/json;charset=UTF-8")
 	//서블릿에서 사용방식을 @ResponseBody가 대신한다.
+	//ResponseEntity: 헤더값까지 보낼수있음
 	public @ResponseBody Map<String,List<Reply>> replyInsert(/* @RequestBody */ Reply r,HttpServletRequest req) {	//@RequestBody: json으로 받을 때 사용
 		r.setR_id(req.getSession().getAttribute("id").toString());
 		Map<String,List<Reply>> rMap=bm.replyInsertJackson(r);
@@ -66,5 +68,6 @@ public class BoardRestController {
 		
 		return new Gson().toJson(files);
 	}
+	
 	
 }

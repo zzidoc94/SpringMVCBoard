@@ -79,7 +79,7 @@ html, body {
 	</div>
 </c:if>
 
-
+<h3>${msg}</h3>
 <h3>회원정보</h3>
 <table id="one_table">
 	<tr height="30">
@@ -125,8 +125,11 @@ html, body {
 <div align="center" id="page">
 	${paging}
 </div>
-
-
+<form action="test">
+	컬럼명:<input type="text" name="cName"><br>
+	검색:<input type="text" name="search"/><br>
+	<button>컬럼 검색</button>
+</form>
 <!-- 모달 박스 -->
 <div id="articleView_layer">
 	<div id="bg_layer"></div>

@@ -13,8 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.board.icia.dao.IBoardDao;
 import com.board.icia.dto.Bfile;
 import com.board.icia.dto.Board;
+import com.board.icia.dto.Member;
 import com.board.icia.dto.Reply;
-import com.board.icia.userClass.DBException;
+import com.board.icia.exception.DBException;
+import com.board.icia.exception.CommonException;
 import com.board.icia.userClass.FileManager;
 import com.board.icia.userClass.Paging;
 import com.board.icia.userClass.UploadFile;
@@ -38,7 +40,9 @@ public class BoardManagement {
 		int pNum=(pageNum==null)?1:pageNum;
 		System.out.println("pNum="+pNum);
 		
+		
 			bList=bDao.getBoardList(pNum);
+			if(pNum<=0) throw new CommonException("잘못된 페이지번호");
 			if(bList!=null) {
 				System.out.println("size="+bList.size());
 				mav.addObject("bList",bList);
@@ -185,5 +189,13 @@ public class BoardManagement {
 		mav.setViewName(view);
 		return mav;
 	}
+	public ModelAndView myBatisTest(String cName, Integer search) {
+		mav=new ModelAndView();
+		List<Member> list=bDao.myBatisTest(cName,search);
+		mav.addObject("list",list);
+		mav.setViewName("test");
+		return mav;
+	}
+	
 	
 }
